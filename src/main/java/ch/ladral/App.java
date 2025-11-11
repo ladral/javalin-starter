@@ -5,14 +5,24 @@ import io.javalin.Javalin;
 
 public class App {
     public static void main(String[] args) {
-        var app = Javalin.create(/*config*/);
 
-        app.get("/api/todos", ctx -> {
-            TodoController todoController = new TodoController();
+        TodoController todoController = new TodoController();
 
-            todoController.getTodos(ctx);
+        Javalin app = Javalin.create().start(7070);
+
+        app.before( ctx -> {
+            String accept = ctx.header("Accept");
+            if (accept != null && !accept.contains("application/json") && !accept.contains("*/*")) {
+                ctx.status(406).result("Not Acceptable - application/json required");
+                ctx.skipRemainingHandlers();
+            }
         });
 
-        app.start(7070);
+
+        app.get("/api/todos", todoController::getTodos);
+        app.get("/api/todos/{id}", todoController::getTodoById);
+        app.post("/api/todos", todoController::createTodo);
+        app.put("/api/todos/{id}", todoController::updateTodo);
+        app.delete("/api/todos/{id}", todoController::deleteTodo);
     }
 }
