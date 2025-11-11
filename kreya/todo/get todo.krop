@@ -1,0 +1,14 @@
+{
+  "details": {
+    "path": "/api/todos/1",
+    "method": "GET"
+  },
+  "requests": [
+    {
+      "contentType": "none"
+    }
+  ],
+  "operationType": "unary",
+  "invokerName": "rest",
+  "typeHint": "GET"
+}

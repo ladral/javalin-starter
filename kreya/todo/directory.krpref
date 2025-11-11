@@ -1,0 +1,11 @@
+{
+  "settings": [
+    {
+      "options": {
+        "rest": {
+          "endpoint": "{{env.api_host}}"
+        }
+      }
+    }
+  ]
+}
