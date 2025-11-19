@@ -1,7 +1,7 @@
 package ch.ladral.controller;
 
-import ch.ladral.model.Todo.Todo;
-import ch.ladral.model.Todo.TodoRequest;
+import ch.ladral.model.todo.Todo;
+import ch.ladral.model.todo.TodoRequest;
 import ch.ladral.model.exceptions.NotFoundException;
 import ch.ladral.repository.TodoRepository;
 import io.javalin.http.Context;
@@ -55,7 +55,6 @@ public class TodoController {
             System.out.println("could not update todo");
             context.status(404).result("Todo Not found");
         }
-
     }
 
     public void deleteTodo(@NotNull Context context) {

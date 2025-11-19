@@ -1,6 +1,6 @@
 package ch.ladral.repository;
 
-import ch.ladral.model.Todo.Todo;
+import ch.ladral.model.todo.Todo;
 import ch.ladral.model.exceptions.NotFoundException;
 
 import java.util.ArrayList;
@@ -50,10 +50,8 @@ public class InMemoryTodoRepository implements TodoRepository{
                 Todo updatedTodo = new Todo(id, description);
                 todos.set(i, updatedTodo);
                 return updatedTodo;
-
             }
         }
-
         throw new NotFoundException();
     }
 

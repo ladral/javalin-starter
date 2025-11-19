@@ -1,4 +1,4 @@
-package ch.ladral.model.Todo;
+package ch.ladral.model.todo;
 
 public record Todo (
         Long id,
