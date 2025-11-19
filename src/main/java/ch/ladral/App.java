@@ -1,12 +1,14 @@
 package ch.ladral;
 
 import ch.ladral.controller.TodoController;
+import ch.ladral.repository.InMemoryTodoRepository;
 import io.javalin.Javalin;
 
 public class App {
     public static void main(String[] args) {
 
-        TodoController todoController = new TodoController();
+        InMemoryTodoRepository repository = new InMemoryTodoRepository();
+        TodoController todoController = new TodoController(repository);
 
         Javalin app = Javalin.create().start(7070);
 
