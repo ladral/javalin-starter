@@ -16,6 +16,31 @@ public class SqliteTodoRepository implements TodoRepository {
 
     private static final String URL = "jdbc:sqlite:src/main/resources/db/todos.sqlite";
 
+
+    public SqliteTodoRepository() {
+        createTableIfNotExists();
+    }
+
+    private void createTableIfNotExists() {
+        String filePath = URL.replace("jdbc:sqlite:", "");
+        java.io.File dbFile = new java.io.File(filePath);
+        if (dbFile.getParentFile() != null) {
+            dbFile.getParentFile().mkdirs();
+        }
+
+        String sql = "CREATE TABLE IF NOT EXISTS todos (" +
+                "id INTEGER PRIMARY KEY, " +
+                "description TEXT" +
+                ");";
+
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement()) {
+            statement.execute(sql);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL);
     }
