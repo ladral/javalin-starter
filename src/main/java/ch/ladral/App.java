@@ -2,12 +2,14 @@ package ch.ladral;
 
 import ch.ladral.controller.TodoController;
 import ch.ladral.repository.InMemoryTodoRepository;
+import ch.ladral.repository.SqliteTodoRepository;
 import io.javalin.Javalin;
 
 public class App {
     public static void main(String[] args) {
 
-        InMemoryTodoRepository repository = new InMemoryTodoRepository();
+//        InMemoryTodoRepository repository = new InMemoryTodoRepository();
+        SqliteTodoRepository repository = new SqliteTodoRepository();
         TodoController todoController = new TodoController(repository);
 
         Javalin app = Javalin.create().start(7070);
